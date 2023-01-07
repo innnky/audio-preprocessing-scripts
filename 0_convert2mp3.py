@@ -8,7 +8,7 @@ for spk in os.listdir("dataset"):
 
             print("start loading: ", long_mp3_item_name)
             name = long_mp3_item_name.split(".")[0]
-            # 转成wav
+            # 转成mp3
             if not long_mp3_item_name.endswith("mp3"):
                 os.system(f"""ffmpeg -i 'dataset/{spk}/{long_mp3_item_name}' 'dataset/{spk}/{name}.mp3'""")
                 os.system(f"""rm 'dataset/{spk}/{long_mp3_item_name}'""")

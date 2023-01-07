@@ -16,7 +16,11 @@ for spk in os.listdir("dataset"):
                 os.system(f"""ffmpeg -i 'dataset/{spk}/{long_mp3_item_name}' 'dataset/{spk}/{name}.wav'""")
                 os.system(f"""rm 'dataset/{spk}/{long_mp3_item_name}'""")
             t = time.time()
-            wav, sr = soundfile.read(f"dataset/{spk}/{name}.wav")
+            try:
+                wav, sr = soundfile.read(f"dataset/{spk}/{name}.wav")
+            except:
+                print(f"load dataset/{spk}/{name}.wav failed")
+                continue
             print("load complete.", time.time()-t)
             # 切片
             for slice_idx in range(((wav.shape[0]//sr )// slice_time) +1):
