@@ -19,7 +19,7 @@ for spk in os.listdir("dataset"):
             wav, sr = soundfile.read(f"dataset/{spk}/{name}.wav")
             print("load complete.", time.time()-t)
             # 切片
-            for slice_idx in range((wav.shape[0]//sr )// slice_time):
+            for slice_idx in range(((wav.shape[0]//sr )// slice_time) +1):
                 if not os.path.exists(f"temp/raw_with_music/{spk}"):
                     os.mkdir(f"temp/raw_with_music/{spk}")
                 soundfile.write(f"temp/raw_with_music/{spk}/spk_{spk}_item_{long_item_idx}_slice_{slice_idx}.wav", wav[slice_idx*sr*slice_time:(slice_idx+1)*sr*slice_time, :], sr)

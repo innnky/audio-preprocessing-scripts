@@ -15,5 +15,5 @@ for spk in os.listdir("temp/raw_with_music"):
             name = slicepath.split(".")[0]
             if not os.path.exists(f"temp/raw_without_music/{spk}"):
                 os.mkdir(f"temp/raw_without_music/{spk}")
-            os.system(f"""mv separated/mdx_extra_q/{name}/vocals.wav temp/raw_without_music/{spk}/{name}.wav""")
-            os.system("rm -rf separated/mdx_extra_q/*")
+            os.system(f"""mv separated/htdemucs/{name}/vocals.wav temp/raw_without_music/{spk}/{name}.wav""")
+            os.system("rm -rf separated/htdemucs/*")
