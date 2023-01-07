@@ -19,3 +19,5 @@ dataset
 
 ### colab
 [colab notebook link](https://colab.research.google.com/drive/1Z-a4HQ4CxyY1cSpVcaEZxta4GVRReens?usp=sharing) 
+### note
+如果不希望切出超长音频可以调整3_final_slice.py中mmax_dur的值，但调小这个值的代价是可能会将一句完整的长句中途截断，如果后续做asr会不太好
