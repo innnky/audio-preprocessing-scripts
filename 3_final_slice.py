@@ -4,7 +4,7 @@ import soundfile
 import librosa
 import os
 
-mmin_dur = 1
+mmin_dur = 3
 mmax_dur = 100000
 mmax_silence = 1
 menergy_threshold = 55
