@@ -28,3 +28,4 @@ for spk in os.listdir("dataset"):
                     os.mkdir(f"temp/raw_with_music/{spk}")
                 soundfile.write(f"temp/raw_with_music/{spk}/spk_{spk}_item_{long_item_idx}_slice_{slice_idx}.wav", wav[slice_idx*sr*slice_time:(slice_idx+1)*sr*slice_time, :], sr)
             # os.system(f"""rm 'dataset/{spk}/{name}.wav'""")
+            del wav

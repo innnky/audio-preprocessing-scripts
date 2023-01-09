@@ -1,14 +1,14 @@
 import os
-
+from tqdm import tqdm
 if not os.path.exists("temp/raw_without_music/"):
     os.mkdir("temp/raw_without_music/")
 print("开始分离伴奏。。。。。。")
 # 使用demucs去除BGM
-for spk in os.listdir("temp/raw_with_music"):
+for spk in tqdm(os.listdir("temp/raw_with_music")):
     if os.path.isdir(f"temp/raw_with_music/{spk}"):
         print("说话人", spk)
         iii = 0
-        for slicepath in [i for i in os.listdir(f"temp/raw_with_music/{spk}") if i.endswith("wav")]:
+        for slicepath in tqdm([i for i in os.listdir(f"temp/raw_with_music/{spk}") if i.endswith("wav")]):
             print(slicepath, iii)
             iii +=1
             os.system(f"""demucs --two-stems=vocals -d cuda temp/raw_with_music/{spk}/{slicepath}""")

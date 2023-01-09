@@ -13,7 +13,7 @@ dataset
     └───录播2.mp4
 ```
 ### requirements
-+ demucs==4.0.0 auditok==0.2.0 soundfile librosa
++ demucs==4.0.0 auditok==0.2.0 soundfile librosa tqdm
 + ffmpeg
 + linux or macos
 
