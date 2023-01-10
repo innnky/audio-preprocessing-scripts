@@ -5,7 +5,7 @@ import librosa
 import os
 from pydub import AudioSegment
 
-mmin_dur = 3
+mmin_dur = 2
 mmax_dur = 100000
 mmax_silence = 1
 menergy_threshold = 55
