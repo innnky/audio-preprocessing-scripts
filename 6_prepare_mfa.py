@@ -1,7 +1,7 @@
 import os.path
 import shutil
 from pypinyin import lazy_pinyin
-all_pinyins = [i.split("\t")[0] for i in open("assets/opencpop-strict.txt").readlines()]
+all_pinyins = [i.split("\t")[0] for i in open("assets/opencpop-strict.dict").readlines()]
 punc = ['！', '？', "…", "，", "。", '!', '?', "…", ",", ".", " ", "、", "~"]
 
 def to_pinyin(s):
@@ -18,21 +18,23 @@ def to_pinyin(s):
         assert pinyin in all_pinyins, (pinyin, s,pinyin_list)
 
     return ' '.join(pinyin_list)
-spk = "otto"
-label_path = f"labels/{spk}_label.txt"
-for line in open(label_path).readlines():
-    wavpath, text = line.strip().split("|")
-    assert os.path.exists(wavpath), wavpath
-    pinyin = to_pinyin(text)
-    print(pinyin)
-    with open(wavpath.replace(".wav", ".lab"), "w") as f:
-        f.write(pinyin+"\n")
 
-# 删除没有标注的音频
-print("正在删除没有标注的音频...")
-for wavname in os.listdir(f"output/{spk}"):
-    if wavname.endswith("wav"):
-        labname = wavname.replace("wav", "lab")
-        if not os.path.exists(f"output/{spk}/{labname}"):
-            print(wavname)
-            os.system(f"rm output/{spk}/{wavname}")
+for spk in os.listdir("output"):
+    if os.path.isdir(f"output/{spk}"):
+        label_path = f"labels/{spk}_label.txt"
+        for line in open(label_path).readlines():
+            wavpath, text = line.strip().split("|")
+            assert os.path.exists(wavpath), wavpath
+            pinyin = to_pinyin(text)
+            print(pinyin)
+            with open(wavpath.replace(".wav", ".lab"), "w") as f:
+                f.write(pinyin+"\n")
+
+        # 删除没有标注的音频
+        print("正在删除没有标注的音频...")
+        for wavname in os.listdir(f"output/{spk}"):
+            if wavname.endswith("wav"):
+                labname = wavname.replace("wav", "lab")
+                if not os.path.exists(f"output/{spk}/{labname}"):
+                    print(wavname)
+                    os.system(f"rm output/{spk}/{wavname}")

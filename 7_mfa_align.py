@@ -1,7 +1,7 @@
 import requests
 import os
 mfa_zip = f'assets/mfa-opencpop-strict.zip'
-dict_path = 'opencpop-strict.txt'
+dict_path = 'assets/opencpop-strict.dict'
 mfa_uri = 'https://diffsinger-1307911855.cos.ap-beijing.myqcloud.com/mfa/mfa-opencpop-strict.zip'
 if not os.path.exists(mfa_zip):
     # Download
