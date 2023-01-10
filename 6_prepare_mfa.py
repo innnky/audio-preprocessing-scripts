@@ -1,7 +1,8 @@
+import os.path
 
 from pypinyin import lazy_pinyin
 all_pinyins = [i.split("\t")[0] for i in open("opencpop-strict.txt").readlines()]
-punc = ['！', '？', "…", "，", "。", '!', '?', "…", ",", ".", " "]
+punc = ['！', '？', "…", "，", "。", '!', '?', "…", ",", ".", " ", "、", "~"]
 
 def to_pinyin(s):
     # Create a translation table
@@ -17,10 +18,11 @@ def to_pinyin(s):
         assert pinyin in all_pinyins, (pinyin, s,pinyin_list)
 
     return ' '.join(pinyin_list)
-spk = "taffy"
+spk = "otto"
 label_path = f"labels/{spk}_label.txt"
 for line in open(label_path).readlines():
     wavpath, text = line.strip().split("|")
+    assert os.path.exists(wavpath), wavpath
     pinyin = to_pinyin(text)
     print(pinyin)
     with open(wavpath.replace(".wav", ".lab"), "w") as f:

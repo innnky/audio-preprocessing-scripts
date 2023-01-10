@@ -3,6 +3,7 @@ import auditok
 import soundfile
 import librosa
 import os
+from pydub import AudioSegment
 
 mmin_dur = 3
 mmax_dur = 100000
