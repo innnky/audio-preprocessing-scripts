@@ -1,5 +1,5 @@
 # audio-preprocessing-scripts
-数据集制作-从录播到伴奏分离到切片脚本
+数据集制作-从录播到伴奏分离到singer多说话人数据集制作脚本
 ### 数据集准备
 ```shell
 dataset
