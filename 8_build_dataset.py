@@ -28,7 +28,7 @@ def length(src: str):
 
 
 print('Environment initialized successfully.')
-for spk in os.listdir("output"):
+for spk in tqdm.tqdm(os.listdir("output")):
     if os.path.isdir(f"output/{spk}"):
         sliced_path = f'output/{spk}'  # Path to your sliced segments of recordings
         textgrids_dir = f'textgrids/{spk}'
@@ -175,6 +175,7 @@ for spk in os.listdir("output"):
         os.makedirs(textgrids_revised_dir, exist_ok=True)
         for wavfile in tqdm.tqdm(sliced_filelist):
             name = os.path.basename(wavfile).rsplit('.', maxsplit=1)[0]
+            import textgrid as tg
             textgrid = tg.TextGrid()
             if not os.path.exists(os.path.join(textgrids_dir, f'{name}.TextGrid')):
                 print(f"skip {name}!no TextGrid found.")
@@ -411,7 +412,7 @@ for spk in os.listdir("output"):
         from textgrid import TextGrid
 
         assert dataset_name != '', 'Dataset name cannot be empty.'
-        assert re.search(r'[^0-9A-Za-z_]', dataset_name) is None, 'Dataset name contains invalid characters.'
+        # assert re.search(r'[^0-9A-Za-z_]', dataset_name) is None, 'Dataset name contains invalid characters.'
         full_name = dataset_name
         if dataset_tags != '':
             assert re.fullmatch(r'[^0-9A-Za-z_]', dataset_name) is None, 'Dataset tags contain invalid characters.'
