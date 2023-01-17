@@ -5,6 +5,14 @@
 + 基于whisper语音识别
 + mfa对齐
 + 完成后处理，构建diffsinger nomidi格式数据集
+# 注意！！！！
+开发中，，仅在mac和linux下通过部分测试，可能有各种bug！若要尝试请备份好自己的数据！！！！
+
+需要安装的依赖：
++ ffmpeg
++ demucs==4.0.0 auditok zhconv pypinyin librosa matplotlib praat-parselmouth pyyaml soundfile sox textgrid
++ git+https://github.com/openai/whisper.git
+
 ### 数据集准备
 ```shell
 dataset
@@ -18,7 +26,6 @@ dataset
     └───录播2.mp4
 ```
 
-还在优化中，主要是mfa相关部分有点麻烦，其他部分基本可以做到一键完成
 
 [//]: # (### requirements)
 
