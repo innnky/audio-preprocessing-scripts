@@ -18,7 +18,7 @@ dataset
     └───录播2.mp4
 ```
 
-还在优化中，主要是mfa相关部分有点麻烦
+还在优化中，主要是mfa相关部分有点麻烦，其他部分基本可以做到一键完成
 
 [//]: # (### requirements)
 
@@ -28,9 +28,9 @@ dataset
 
 [//]: # (+ linux or macos)
 
-[//]: # (### colab)
+### colab
 
-[//]: # ([colab notebook link]&#40;https://colab.research.google.com/drive/1Z-a4HQ4CxyY1cSpVcaEZxta4GVRReens?usp=sharing&#41; )
+[colab notebook link](https://colab.research.google.com/drive/1VZ7aD8Iql0sJEKztQet7UHkcfVwruuvS?usp=sharing) 
 
 [//]: # (### note)
 
