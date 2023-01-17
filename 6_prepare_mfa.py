@@ -24,7 +24,9 @@ for spk in os.listdir("output"):
         label_path = f"labels/{spk}_label.txt"
         for line in open(label_path).readlines():
             wavpath, text = line.strip().split("|")
-            assert os.path.exists(wavpath), wavpath
+            if not os.path.exists(wavpath):
+                print(wavpath, "not exist, skip")
+                continue
             pinyin = to_pinyin(text)
             print(pinyin)
             with open(wavpath.replace(".wav", ".lab"), "w") as f:

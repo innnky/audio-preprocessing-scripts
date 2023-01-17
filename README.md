@@ -18,6 +18,8 @@ dataset
     └───录播2.mp4
 ```
 
+还在优化中，主要是mfa相关部分有点麻烦
+
 [//]: # (### requirements)
 
 [//]: # (+ demucs==4.0.0 auditok==0.2.0  librosa=0.8.1 soundfile tqdm)
