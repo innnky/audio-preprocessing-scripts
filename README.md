@@ -32,6 +32,9 @@ dataset
 
 [colab notebook link](https://colab.research.google.com/drive/1VZ7aD8Iql0sJEKztQet7UHkcfVwruuvS?usp=sharing) 
 
+## Reference
++ [DiffSinger数据集制作](https://github.com/openvpi/DiffSinger/tree/refactor/pipelines)
+
 [//]: # (### note)
 
 [//]: # (如果不希望切出超长音频可以调整3_final_slice.py中mmax_dur的值，但调小这个值的代价是可能会将一句完整的长句中途截断，如果后续做asr会不太好)
