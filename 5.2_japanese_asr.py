@@ -33,7 +33,7 @@ if not os.path.exists("labels"):
     os.mkdir("labels")
 
 for spk in os.listdir("output"):
-    if os.path.isdir(f"output/{spk}"):
+    if os.path.isdir(f"output/{spk}") and os.path.exists(f"output/{spk}/ja"):
         name = spk
         wav_paths = [f"output/{name}/{i}" for i in sorted(os.listdir(f"output/{name}")) if i.endswith("wav")]
         os.system(f"touch labels/{spk}_label.txt")
