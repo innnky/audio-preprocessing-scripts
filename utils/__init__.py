@@ -121,7 +121,7 @@ def load_phoneme_asr_model():
 
 def get_asr_result(m, wavpath):
     model, net_g = m
-    units = ut.get_whisper_units(model, wavpath, False)
+    units = ut.get_whisper_units(model, wavpath)
     x, _ = net_g(units, phone_lengths=torch.LongTensor([units.shape[2]]))
     phones, durs = convert_x_to_phones(x)
     return phones, durs
