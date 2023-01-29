@@ -19,13 +19,13 @@ def load_whisper_model(*args):
     model = whisper.load_model("small")
     return model
 
-def get_whisper_units(model=None, path=None, fp16=False):
+def get_whisper_units(model=None, path=None):
     from whisper import log_mel_spectrogram, pad_or_trim
     wavdata, sr = librosa.load(path, sr=None)
     if sr != 16000:
         wavdata = librosa.resample(wavdata, sr, 16000)
     mel = log_mel_spectrogram(wavdata).to(device)[:, :3000]
-    if fp16:
+    if torch.cuda.is_available():
         mel = mel.to(torch.float16)
     feature_len = mel.shape[-1] // 2
     assert  mel.shape[-1] < 3000, "输入音频过长，只允许输入30以内音频"
