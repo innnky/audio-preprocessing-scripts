@@ -116,13 +116,19 @@ def load_phoneme_asr_model():
     net_g = SynthesizerTrn(hps)
     _ = net_g.eval()
     _ = ut.load_checkpoint(checkpoint_path, net_g, None)
+    if torch.cuda.is_available():
+        net_g = net_g.cuda().half()
     model = ut.load_whisper_model()
     return (model, net_g)
 
 def get_asr_result(m, wavpath):
     model, net_g = m
     units = ut.get_whisper_units(model, wavpath)
-    x, _ = net_g(units, phone_lengths=torch.LongTensor([units.shape[2]]))
+    with torch.no_grad():
+        if torch.cuda.is_available():
+            units = units.cuda()
+        x, _ = net_g(units, phone_lengths=torch.LongTensor([units.shape[2]]).to(units.device))
+        x = x.cpu()
     phones, durs = convert_x_to_phones(x)
     return phones, durs
 

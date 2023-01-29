@@ -17,7 +17,10 @@ for spk in os.listdir("output"):
         fo = open(f"singer_data/{spk}/raw/transcriptions.txt", "w")
         for path in tqdm(wav_paths):
             wav, sr = librosa.load(path, 44100)
-            phones, durs = utils.get_asr_result(model, wavpath=path)
+            try:
+                phones, durs = utils.get_asr_result(model, wavpath=path)
+            except:
+                continue
             phones = " ".join(phones)
             id_ = os.path.splitext(os.path.basename(path))[0]
             durs = " ".join([str(i) for i in durs])
