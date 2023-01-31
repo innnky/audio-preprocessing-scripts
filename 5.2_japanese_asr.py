@@ -7,7 +7,7 @@ punc = ['！', '？', "…", "，", "。", '!', '?', "…", ",", ".", " "]
 import re
 
 def is_japanese(char):
-    return re.search(r'[A-Za-z\d\u3005\u3040-\u30ff\u4e00-\u9fff\uff11-\uff19\uff21-\uff3a\uff41-\uff5a\uff66-\uff9d]', char) is not None
+    return re.search(r'[\u3005\u3040-\u30ff\u4e00-\u9fff\uff41-\uff5a\uff66-\uff9d]', char) is not None
 
 def is_all_japanese(text):
     if len(text) == 0:
@@ -22,6 +22,13 @@ def is_all_japanese(text):
 _symbols_to_japanese = [(re.compile('%s' % x[0]), x[1]) for x in [
     ('％', 'パーセント')
 ]]
+def str_replace( data):
+    chinaTab = ['：', '；', '，', '。', '！', '？', '【', '】', '“', '（', '）', '%', '#', '@', '&', "‘", ' ', '\n', '”',"—", "·",'、','...']
+    englishTab = [':', ';', ',', '.', '!', '?', '[', ']', '"', '(', ')', '%', '#', '@', '&', "'", ' ', '', '"', "-", "-", ",","…"]
+    for index in range(len(chinaTab)):
+        if chinaTab[index] in data:
+            data = data.replace(chinaTab[index], englishTab[index])
+    return data
 def symbols_to_japanese(text):
     for regex, replacement in _symbols_to_japanese:
         text = re.sub(regex, replacement, text)
@@ -41,6 +48,7 @@ for spk in os.listdir("output"):
         for path in tqdm(wav_paths):
             result = model.transcribe(path)
             txt = result["text"]
+            txt = str_replace(txt)
             txt = symbols_to_japanese(txt)
             if not is_all_japanese(txt):
                 print("not japanese", txt)
