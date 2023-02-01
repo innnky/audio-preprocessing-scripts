@@ -8,7 +8,7 @@ mmin_dur = 2
 mmax_dur = 100000
 mmax_silence = 1
 menergy_threshold = 55
-
+max_drop = 12
 if not os.path.exists("output"):
     os.mkdir("output")
 
@@ -47,7 +47,9 @@ def qiefen(path, file_pre,start_i=0, ty='audio', mmin_dur=1, mmax_dur=100000, mm
             "Region {i}: {r.meta.start:.3f}s -- {r.meta.end:.3f}s".format(i=i, r=r))
 
         epath = ''
-        if r.meta.end-r.meta.start <mmin_dur:
+        if r.meta.end - r.meta.start < mmin_dur:
+            continue
+        if r.meta.end - r.meta.start > max_drop:
             continue
         if (os.path.exists(file_pre) == False):
             os.mkdir(file_pre)
