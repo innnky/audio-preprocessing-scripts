@@ -19,7 +19,7 @@ def is_all_chinese(text):
             return False
     return True
 
-model = whisper.load_model("large-v2")
+model = whisper.load_model("medium")
 
 if not os.path.exists("labels"):
     os.mkdir("labels")
@@ -32,7 +32,18 @@ for spk in os.listdir("output"):
         fo = open(f"labels/{spk}_label.txt", "w")
         for path in tqdm(wav_paths):
             result = model.transcribe(path)
-            txt = zhconv.convert(result["text"], "zh-cn")
+            text = ''
+            for seg in result["segments"]:
+                text += seg["text"]
+                if text!="" and text[-1] not in punc:
+                    text += ","
+            if text == '':
+                print("null")
+                continue
+            if text[-1] == ",":
+                text = text[:-1] + "."
+            text = text.replace(" ", ",")
+            txt = zhconv.convert(text, "zh-cn")
             if not is_all_chinese(txt):
                 print("not chinese", txt)
                 continue
