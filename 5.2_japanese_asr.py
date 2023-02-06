@@ -1,8 +1,11 @@
-import zhconv
+import langid
 import os
 import whisper
 from tqdm import tqdm
-punc = ['！', '？', "…", "，", "。", '!', '?', "…", ",", ".", " "]
+
+chinaTab = ['：', '；', '，', '。', '！', '？', '【', '】', '“', '（', '）', '%', '#', '@', '&', "‘", ' ', '\n', '”', "—", "·",
+            '、', '...']
+punc = ['！', '？', "…", "，", "。", '!', '?', "…", ",", ".", " "]+chinaTab
 
 import re
 
@@ -34,7 +37,7 @@ def symbols_to_japanese(text):
         text = re.sub(regex, replacement, text)
     return text
 
-model = whisper.load_model("large-v2")
+model = whisper.load_model("medium")
 
 if not os.path.exists("labels"):
     os.mkdir("labels")
@@ -47,11 +50,23 @@ for spk in os.listdir("output"):
         fo = open(f"labels/{spk}_label.txt", "w")
         for path in tqdm(wav_paths):
             result = model.transcribe(path)
-            txt = result["text"]
-            txt = str_replace(txt)
+            text = ''
+            for seg in result["segments"]:
+                text += seg["text"]
+                if text!="" and text[-1] not in punc:
+                    text += ","
+            if text == '':
+                print("null")
+                continue
+            if text[-1] == ",":
+                text = text[:-1] + "."
+            txt = str_replace(text)
             txt = symbols_to_japanese(txt)
             if not is_all_japanese(txt):
                 print("not japanese", txt)
+                continue
+            if langid.classify(text)[0]!="ja":
+                print("langid not japanese", txt)
                 continue
             fo.write("{}|{}\n".format(path, txt))
             fo.flush()
