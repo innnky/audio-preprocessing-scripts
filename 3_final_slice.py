@@ -8,7 +8,7 @@ mmin_dur = 2
 mmax_dur = 100000
 mmax_silence = 1
 menergy_threshold = 55
-remove_long_audio = True
+remove_long_audio = False
 remove_threshhold = 13
 if not os.path.exists("output"):
     os.mkdir("output")
