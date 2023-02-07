@@ -4,11 +4,12 @@ import soundfile
 import librosa
 import os
 
-mmin_dur = 3
+mmin_dur = 2
 mmax_dur = 100000
 mmax_silence = 1
 menergy_threshold = 55
-
+remove_long_audio = False
+remove_threshhold = 13
 if not os.path.exists("output"):
     os.mkdir("output")
 
@@ -48,6 +49,8 @@ def qiefen(path, file_pre,start_i=0, ty='audio', mmin_dur=1, mmax_dur=100000, mm
 
         epath = ''
         if r.meta.end-r.meta.start <mmin_dur:
+            continue
+        if remove_long_audio and r.meta.end-r.meta.start >remove_threshhold:
             continue
         if (os.path.exists(file_pre) == False):
             os.mkdir(file_pre)
