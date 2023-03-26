@@ -2,7 +2,7 @@ import os
 from tqdm import tqdm
 punc = ['！', '？', "…", "，", "。", '!', '?', "…", ",", ".", " "]
 from paddle_annotation import annotation_dataset
-
+# xmzhu/whisper-small-zh
 if not os.path.exists("labels"):
     os.mkdir("labels")
 
